@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\TransController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +20,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/home', [HomeController::class, 'index']);
+
+Route::prefix('category')->group(function () {
+    Route::get('/food-beverage', [ProductsController::class, 'foodbeverage']);
+    Route::get('/beauty-health', [ProductsController::class, 'beautyhealth']);
+    Route::get('/home-care', [ProductsController::class, 'homecare']);
+    Route::get('/baby-kid', [ProductsController::class, 'babykid']);
+});
+
+Route::get('/user/{id}/name/{name}', [UserController::class, 'index']);
+
+Route::get('/trans', [TransController::class, 'index']);
